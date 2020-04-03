@@ -1,0 +1,67 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-3">
+    <div class="container">
+      <a class="navbar-brand" style='letter-spacing:4px;' href="/">ASTO</a>
+      <button onclick='ABC()' class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about">About</a>
+          </li>
+
+  {{#if user}}
+      <li class="nav-item">
+            <a class="nav-link" href="/FM/world">Explore</a>
+      </li>
+{{/if}}
+        </ul>
+        <ul class="navbar-nav ml-auto">
+
+          {{#if user}}
+
+
+
+          <li class="nav-item">
+            <a href="/FM" class="nav-link" >
+               REPOSITORY
+              </a>
+          </li>
+          <li class="nav-item">
+            <a href="/FM/add" class="nav-link" >
+              CREATE
+              </a>
+          </li>
+
+            <li class="nav-item">
+              <a href="/users/logout" class="nav-link">
+                LOGOUT <i class="fa fa-sign-out" aria-hidden="true"></i>
+              </a>
+            </li>
+          {{else}}
+            <li class="nav-item">
+              <a href="/users/login" class="nav-link">
+                Login <i class="fa fa-user"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/users/register" class="nav-link">
+                Register
+                <i class="fa fa-user-plus"></i>
+              </a>
+            </li>
+          {{/if}}
+{{!-- {{#if user}}
+  <form class="form-inline" action="/FM/find" method="post">
+     <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search by Email..." aria-label="Search">
+   <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+ </form>
+{{/if}} --}}
+        </ul>
+      </div>
+  </div>
+</nav>

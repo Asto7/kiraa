@@ -1,0 +1,144 @@
+{{!-- {{fm.tags}} --}}
+  <form action="/FM/edit/{{fm._id}}"  method="post" >
+
+    <div class="card card-body" style=" margin:auto; float:center; width:70%; height:100%; ">
+    <center><input name="title" value="{{fm.title}}" required style="border-style:none;  text-align: center; font-size:20px; letter-spacing:1px; border-bottom:1px solid black;"placeholder="Title..."value={{title}}></center>
+        
+        <div style="margin-bottom:0px; padding-bottom:0px"  class="form-group">
+          <label for="code">Code:</label>
+                  <label style="margin-top:0px; float:right; padding-top:0px" class="form-check-label">Language:
+                    <select  name="language" style="display:inline; color:#1BA95C" class="form-control">
+                        <option {{#ifEquals fm.language "C++"}}Selected{{/ifEquals}} value="C++">Cpp 11</option>
+                        <option {{#ifEquals fm.language "Py"}}Selected{{/ifEquals}} value="Py">Python</option>
+                        <option {{#ifEquals fm.language "Jv"}}Selected{{/ifEquals}} value="Jv">Java</option>
+                        <option {{#ifEquals fm.language "C"}}Selected{{/ifEquals}}value="C">C</option>
+                    </select>
+                  </label>
+
+            <div style="font-size:1em; border-radius: 10px;border-width: 1px; border-style: solid; border-color: blue; float:center;  scroll:auto; width:100%; height:15rem;" id="editor"></div>
+            <textarea class="form-control" style="display: none;margin:auto; border-color: blue; float:center;  scroll:auto; width:100%; height:15rem;" value='{{fm.code}}' name="code" id="code" type="text" >{{fm.code}}</textarea>
+        </div>
+
+        <div class="form-group">
+            <input type="file" id="files" name="file" />
+            <span class="readBytesButtons">
+              <span style="background-color: black; color:white; padding:5px; border-radius: 5px; letter-spacing: 1.5px; font-size: 15px; font-family:cursive; cursor:pointer;">Push Code!</span>
+            </span>
+        </div>
+
+        
+            <div class="form-group">
+              <label for="inputs">Inputs:</label>
+              <textarea class="form-control" style=" margin:auto; border-color: blue; float:center;  scroll:auto; width:100%; height:3rem;" value="{{fm.inputs}}"  name="inputs" type="text" >{{fm.inputs}}</textarea>
+            </div>
+
+    {{#if fm.output}}
+          <div class="form-group">
+              <label for="inputs">Output:</label>
+              <textarea class="form-control" style=" margin:auto; border-color:{{#if fm.type}}red{{else}}blue{{/if}}; float:center;  scroll:auto; width:100%; height:5rem;" type="text" >{{fm.output}}</textarea>
+            </div>
+    {{/if}}
+
+
+        <div class="form-group">
+          <label for="details">Problem Tags:</label>&nbsp;&nbsp;&nbsp;<span style="color:crimson">{*Click on tag to discard it}</span>
+             <span onClick="addMore()" style="background-color: black; color:white; padding:5px; border-radius: 5px; letter-spacing: 1.5px; font-size: 15px; font-family:cursive; cursor:pointer;">Add More!</span>
+              
+               <div id="TAGS">
+                      {{#each fm.tags as |x|}}
+                            <div onclick="discard()" style='display: inline; margin-right:0.8rem;'><input  style='display:none;' name="tags" value={{x}}><span style='cursor:pointer; font-size:0.9em; font-family:`Times New Roman`, Times, serif; letter-spacing:0.1em;' class="badge badge-secondary">{{x}}</span></div>
+                      {{/each}}
+               </div>
+        </div>
+
+        <div class="form-group">
+          <label for="details">ReadMe:</label>
+          <textarea class="form-control" style=" margin:auto; border-color: blue; float:center;  scroll:auto; width:100%; height:5rem;" value='{{fm.details}}' name="details" type="text" >{{fm.details}}</textarea>
+        </div>
+
+
+        <button type="submit"  name="action" value="compile" id='btn' style="display:block; margin-bottom:1em;" class="btn btn-dark">Compile</button>  
+        <button type="submit"   name="action"  value="save" id='btn' style="display:block; background-color:#123C69" class="btn btn-dark">Save</button>
+    </div>
+    </form>
+<style>
+  label{
+    font-weight: 800;;
+  }
+</style>
+<script>
+        function addMore(){
+          let data=prompt("Enter Tag Name")
+          if(data)
+            document.getElementById('TAGS').innerHTML+="<div onclick='discard()' style='display: inline; margin-right:0.8rem;'><input style='display:none;' name='tags' value="+data+"><span style='cursor:pointer; font-size:0.9em; font-family:`Times New Roman`, Times, serif; letter-spacing:0.1em;' class='badge badge-secondary'>"+data+"</span></div>";
+        }
+
+        function discard(){
+          let parent=event.currentTarget.parentElement;
+          parent.removeChild(event.currentTarget);
+        }
+</script>
+
+    <script>
+          let editor = ace.edit("editor");
+          editor.session.setMode("ace/mode/html");
+        editor.setTheme("ace/theme/github");
+        let EditSession = require("ace/edit_session").EditSession;
+
+    let js = new EditSession(document.getElementById('code').value);
+    let css = new EditSession(["some", "css", "code here"]);
+    // and then to load document into editor, just call
+
+    editor.setSession(js)
+        editor.setReadOnly(false)
+        editor.setOptions({
+        autoScrollEditorIntoView: true,
+        copyWithEmptySelection: true,
+    });
+
+        editor.session.setMode("ace/mode/c_cpp");
+
+    </script>
+
+
+    <script>
+      function readBlob(opt_startByte, opt_stopByte) {
+
+        let files = document.getElementById('files').files;
+        if (!files.length) {
+          alert('Please select a file!');
+          return;
+        }
+
+        let file = files[0];
+        let start = parseInt(opt_startByte) || 0;
+        let stop = parseInt(opt_stopByte) || file.size - 1;
+
+        let reader = new FileReader();
+
+        // If we use onloadend, we need to check the readyState.
+        reader.onloadend = function(evt) {
+          if (evt.target.readyState == FileReader.DONE) { // DONE == 2
+            document.getElementById('code').value = evt.target.result;
+            editor.setValue(evt.target.result);
+          }
+        };
+
+        let blob = file.slice(start, stop + 1);
+        reader.readAsBinaryString(blob);
+      }
+
+      document.querySelector('.readBytesButtons').addEventListener('click', function(evt) {
+        if (evt.target.tagName.toLowerCase() == 'span') {
+          let startByte = evt.target.getAttribute('data-startbyte');
+          let endByte = evt.target.getAttribute('data-endbyte');
+          readBlob(startByte, endByte);
+        }
+      }, false);
+    </script>
+    <script>
+    document.getElementById('editor').addEventListener('keyup',
+    function(){
+    let sz=document.getElementById('code').value=editor.getValue();
+    })
+    </script>

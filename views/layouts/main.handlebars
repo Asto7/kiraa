@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+ 
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+
+      {{!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous"> --}}
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+
+    <script
+     charset="UTF-8"
+     src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/highlight.min.js"></script>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/styles/github.min.css">
+
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.5/ace.js"> </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.5/mode-c_cpp.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.5/snippets/html.js"></script>
+     <style media="screen">
+     #editor {
+  position: relative;
+  width: 500px;
+  height: 600px;
+  margin-bottom:15px ;
+}
+     </style>
+     <script>hljs.initHighlightingOnLoad();</script>
+    <title>Asto...</title>
+
+</head>
+<body>
+  <div id="fb-root"></div>
+  {{!-- <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.3"></script> --}}
+    {{> _navbar}}
+
+    <div class="container">
+        {{> _msg}}
+        {{> _errors}}
+        {{{body}}}
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  </body>
+
+<script>
+
+function ABC(){
+
+  if(document.getElementsByClassName('navbar-collapse')[0].style.display!='flex'){
+    document.getElementsByClassName('navbar-expand-sm')[0].style.height='auto';
+  document.getElementsByClassName('navbar-collapse')[0].style.visibility='collapse';
+  document.getElementsByClassName('navbar-collapse')[0].style.display='flex';
+  document.getElementsByClassName('navbar-collapse')[0].style.zIndex='100';
+  document.getElementsByClassName('navbar-expand-sm')[0].style.zIndex='100';
+  document.getElementsByClassName('navbar-expand-sm')[0].style.display='flex';
+for(var i=0;i<document.getElementsByClassName('nav-item').length;i++)
+  document.getElementsByClassName('nav-item')[i].style.visibility='visible';
+
+}
+else{
+  document.getElementsByClassName('navbar-collapse')[0].style.visibility='hidden';
+  document.getElementsByClassName('navbar-collapse')[0].style.display='none';
+  document.getElementsByClassName('navbar-expand-sm')[0].style.height='4rem';
+for(var i=0;i<document.getElementsByClassName('nav-item').length;i++)
+  document.getElementsByClassName('nav-item')[i].style.visibility='hidden';
+
+
+}
+
+
+
+}
+
+</script>
+</html>
