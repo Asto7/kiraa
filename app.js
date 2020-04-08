@@ -96,9 +96,14 @@ app.get('/about', (req,res) => {
 app.use('/users', users);
 app.use('/FM', FM);
 
-app.get('*',(req,res)=>res.send("404, Page Not Found!"));
-const port = process.env.port||4000;
 
-var server=app.listen(port, () => {
-   console.log(`listening on port ${port}`);
+
+app.get('*',(req,res)=>res.send("404, Page Not Found!"));
+
+
+const port = process.env.PORT || 8000;
+
+app.listen(port, () => {
+    console.log("App is running on port " + port);
 });
+
