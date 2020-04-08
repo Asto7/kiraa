@@ -20,7 +20,7 @@ require('./config/passport')(passport);
 // db config
 const db = require('./config/database');
 
-var url='mongodb://localhost:27017/spider-laterals';
+var url='mongodb+srv://Asto7:Hello@cluster0-g69kt.mongodb.net/test?retryWrites=true&w=majority';
 // connect to mongoose
 mongoose.connect(url,
 {useNewUrlParser: true}).then(() => {
@@ -97,7 +97,7 @@ app.use('/users', users);
 app.use('/FM', FM);
 
 app.get('*',(req,res)=>res.send("404, Page Not Found!"));
-const port = 4000||process.env.port;
+const port = process.env.port||4000;
 
 var server=app.listen(port, () => {
    console.log(`listening on port ${port}`);
