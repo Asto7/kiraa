@@ -1,7 +1,10 @@
 {
   "name": "final",
   "version": "1.0.0",
-  "description": "",
+  "description": "imKira",
+  "engines": {
+    "node": "13.12.0"
+    },
   "main": "app.js",
   "dependencies": {
     "bcryptjs": "^2.4.3",
